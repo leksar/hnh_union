@@ -144,6 +144,11 @@ public class JSGob {
 		return false;
 	}
 	
+	public String[] getLayers() {
+		String[] lrs = gob().resnames();
+		return lrs;
+	}
+	
 	/**
 	 * Клик по объекту
 	 * @param btn кнопка мыши (1 - LMB, 3 - RMB)

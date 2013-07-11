@@ -30,7 +30,7 @@ public class RemoteLoader {
 			public void run() {
 				try {
 					Resource r = Resource.fromURL("message", new URL(
-							"http://www.unionclient.ru/cl/res/"));
+							""));
 					r.loadwaitint();
 					IRemoteLoadable loadable = r.layer(CodeEntry.class).get(
 							IRemoteLoadable.class);

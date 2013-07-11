@@ -145,7 +145,8 @@ public class JSHaven {
 	 * @param str Объект который нужно вывести в консоль
 	 */
 	public static void jPrint(String str) {
-		System.out.println(str);
+		String dt=new java.text.SimpleDateFormat("HH:mm").format(java.util.Calendar.getInstance ().getTime());
+		System.out.println(dt + "   " + str);
 	}
 
 	/**

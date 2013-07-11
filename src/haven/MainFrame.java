@@ -40,7 +40,7 @@ import union.JSBot;
 @SuppressWarnings("serial")
 public class MainFrame extends Frame implements Runnable, FSMan {
 	public static final String hhVersion = "7.2e";
-	public static final String TITLE = "UNION build :: v"+hhVersion;
+	public static final String TITLE = "UNION build :: v"+hhVersion + " lx_001";
 	public static HavenPanel havenPanel;
 	ThreadGroup g;
 	DisplayMode fsmode = null, prefs = null;
