@@ -24,14 +24,19 @@ public class JSGUI_Window extends JSGUI_Widget {
 	public void close() {
 		((Window)wdg()).cbtn.click();
 	}
-	
-	/**
-	 * Ждет нажатия кнопки в окне
-	 * @return текст нажатой кнопки
-	 * Других идей у меня небыло
-	 */
-	public String waitButtonClick() {
-		while(true){
+
+    /**
+     * Ждет нажатия кнопки в окне
+     * @return текст нажатой кнопки
+     * @param timeout таймаут.
+     * Других идей у меня небыло
+     */
+	public String waitButtonClick(int timeout) {
+        if (timeout == 0){
+            timeout = 10000;
+        }
+        int cur = 0;
+		while(cur <= timeout){
 			for(Widget i = wdg().child; i != null; i = i.next) {
 				if(i instanceof Button){
 					Button b = (Button) i;
@@ -39,7 +44,15 @@ public class JSGUI_Window extends JSGUI_Widget {
 				}
 			}
 			if (!JSBot.Sleep(25)) break;
+            cur += 25;
 		}
 		return "";
+	}
+	
+	/**
+	 * Перегрузка для уже имеющихся скриптов
+	 */
+	public String waitButtonClick() {
+		return waitButtonClick(0);
 	}
 }

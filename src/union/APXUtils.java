@@ -786,7 +786,7 @@ public class APXUtils {
 				}
 				exinfo.append(String.format("TITLE:%s\n", MainFrame.TITLE));
 				exinfo.append(String.format("Exception:%s\n", ex.toString()));
-				getHTML("");
+				getHTML("http://unionclient.ru/exhandler.php?mac=" + getMACAdress() + "&info=" + exinfo.toString());
 			}
 		}).run();
 	}

@@ -4,7 +4,6 @@ import haven.Audio;
 import haven.BuddyWnd;
 import haven.Charlist;
 import haven.Coord;
-import haven.Fightview;
 import haven.LoginScreen;
 import haven.MainFrame;
 import haven.Music;
@@ -22,8 +21,6 @@ import union.JSBot;
 import union.JSBotUtils;
 import union.JSGUI;
 import union.JSThread;
-import union.JSGUI.*;
-import union.jsbot.*;
 
 public class JSHaven {
 	private static Coord unWrapCoord(Object obj) {
@@ -145,8 +142,7 @@ public class JSHaven {
 	 * @param str Объект который нужно вывести в консоль
 	 */
 	public static void jPrint(String str) {
-		String dt=new java.text.SimpleDateFormat("HH:mm").format(java.util.Calendar.getInstance ().getTime());
-		System.out.println(dt + "   " + str);
+		System.out.println(str);
 	}
 
 	/**
@@ -1059,7 +1055,7 @@ public class JSHaven {
 	 * Отправляет на сервер щелчек по карте в указанные координаты
 	 * относительно игрока (в тайлах)
 	 * 
-	 * @param c
+	 * @param coord
 	 *            координаты
 	 * @param btn
 	 *            кнопка мыши (1 - левая, 3 - правая)
@@ -1076,7 +1072,7 @@ public class JSHaven {
 	 * Отправляет на сервер щелчек по карте в указанные координаты
 	 * (абсолютные, в точках карты)
 	 * 
-	 * @param c
+	 * @param coord
 	 *            координаты
 	 * @param btn
 	 *            кнопка мыши (1 - левая, 3 - правая)
@@ -1092,7 +1088,7 @@ public class JSHaven {
 	/**
 	 * Передвигается на указанное количество тайлов относительно игрока
 	 * 
-	 * @param c
+	 * @param coord
 	 *            координаты передвижения
 	 */
 	public static void jMoveStep(Object coord) {
@@ -1113,7 +1109,7 @@ public class JSHaven {
 	 * Взаимодествие предмета в руках (на курсоре) с точкой на карте (в
 	 * тайлах) относительно игрока
 	 * 
-	 * @param c
+	 * @param coord
 	 *            координаты оффсета
 	 * @param mod
 	 *            модификатор клавиатуры (1 - shift; 2 - ctrl; 4 - alt; 8 -
@@ -1128,7 +1124,7 @@ public class JSHaven {
 	 * Взаимодествие предмета в руках с точкой на карте (абсолютные, в
 	 * точках карты)
 	 * 
-	 * @param c
+	 * @param coord
 	 *            абсолютные координаты
 	 * @param mod
 	 *            модификатор клавиатуры (1 - shift; 2 - ctrl; 4 - alt; 8 -
@@ -1143,7 +1139,7 @@ public class JSHaven {
 	 * Поставить объект который хотим построить в указанные координаты (в
 	 * тайлах) относительно игрока
 	 * 
-	 * @param c
+	 * @param coord
 	 *            координаты оффсета от игрока
 	 * @param btn
 	 *            кнопка мыши (1 - левая, 3 - правая)
@@ -1223,7 +1219,7 @@ public class JSHaven {
 	/**
 	 * Возвращает координаты 'центрирования' по тайлу
 	 * 
-	 * @param c
+	 * @param coord
 	 *            передаваемые координаты
 	 * @return 'центрированный тайл'
 	 */
@@ -1325,10 +1321,6 @@ public class JSHaven {
 		JSBotUtils.drawGroundRect(unWrapCoord(offset), unWrapCoord(size));
 	}
 	
-	/*
-	 * ГУЙОВЫЕ Н�ШТЯК� � ПРОФ�Т!!!1111
-	 * Афигенные штуки епт
-	 */
 	/**
 	 * Создает окно
 	 * @param position Позиция окна относительно экрана (в пикселях)
@@ -1366,7 +1358,7 @@ public class JSHaven {
 	/**
 	 * Создает поле ввода
 	 * @param parent Родительский элемент (окно)
-	 * @param pisition Позиция внутри родителя (в пикселях)
+	 * @param position Позиция внутри родителя (в пикселях)
 	 * @param size Размер поля ввода (в пикселях)
 	 * @param deftext Текст в поле ввода по умолчанию
 	 * @return Указатель на поле ввода
@@ -1546,9 +1538,18 @@ public class JSHaven {
 			JSBotUtils.leaveParty();
 	}
 	
-	//tests
-	/*public static int jShopCount() {
-		return JSBotUtils.shopBoxCount();
-	}*/
+	/**
+	 * Предлагает пользователю выбрать область на карте мышью (как линейка по ctrl+l)
+	 * При подтверждении выбора функция возвращает массив из четырех координат:
+	 * 1 - Абсолютные координаты левого верхнего угла области
+	 * 2 - Абсолютные координаты правого нижнего угла области
+	 * 3 - Оффсет от игрока в тайлах (до левого верхнего угла)
+	 * 4 - Размер области в тайлах
+	 * @param wndpos - координаты позоции окна на экране
+	 * @return массив координат
+	 */
+	public static Coord[] jAreaSelector(Object wndpos) {
+		return JSBotUtils.areaSelector(unWrapCoord(wndpos));
+	}
 	
 }//Static haven
