@@ -463,13 +463,13 @@ public class MiniMap extends Widget {
 	public boolean mousedown(Coord c, int button) {
 		if (button == 1) {
 			if (ui.modctrl) {
-				ui.grabmouse(this);
-				dm = true;
-				doff = c;
-			} else {
 				Coord tc = localToReal(c);
 				mv.map_abs_click(tc.x, tc.y, button, 0);
 				return false;
+			} else {
+				ui.grabmouse(this);
+				dm = true;
+				doff = c;
 			}
 		}
 		return (true);
