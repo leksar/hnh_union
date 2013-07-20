@@ -215,6 +215,10 @@ public class CharWnd extends Window {
 						lbl2.tooltip = null;
 					}
 				}
+				else
+				{
+					lbl2.settext(" ");
+				}
 			} 
 			lbl.settext(Integer.toString(attr.base));
 			if ((nm == "intel") && study != null) {
