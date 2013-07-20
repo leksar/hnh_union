@@ -173,29 +173,52 @@ public class CharWnd extends Window {
 
 	class NAttr extends Attr {
 		Label lbl;
+		Label lbl2;
 
 		NAttr(String nm, int x, int y) {
 			super(nm);
-			this.lbl = new Label(new Coord(x, y), cattr, "0");
+			this.lbl = new Label(new Coord(x, y), cattr, "");
+			if (nm == "str" ||
+				nm == "agil" ||
+				nm == "intel" ||
+				nm == "cons" ||
+				nm == "perc" ||
+				nm == "csm" ||
+				nm == "dxt" ||
+				nm == "psy")
+					this.lbl2 = new Label(new Coord(x+30, y), cattr, "");
 			update();
 		}
 
 		public void update() {
-			lbl.settext(Integer.toString(attr.comp));
+			if (nm == "str" ||
+					nm == "agil" ||
+					nm == "intel" ||
+					nm == "cons" ||
+					nm == "perc" ||
+					nm == "csm" ||
+					nm == "dxt" ||
+					nm == "psy")
+			{
+				if (attr.comp != attr.base)	{
+					lbl2.settext(Integer.toString(attr.comp));
+					if (attr.comp < attr.base) {
+						lbl2.setcolor(debuff);
+						lbl2.tooltip = String.format("%d - %d", attr.base, attr.base
+								- attr.comp);
+					} else if (attr.comp > attr.base) {
+						lbl2.setcolor(buff);
+						lbl2.tooltip = String.format("%d + %d", attr.base, attr.comp
+								- attr.base);
+					} else {
+						lbl2.setcolor(Color.WHITE);
+						lbl2.tooltip = null;
+					}
+				}
+			} 
+			lbl.settext(Integer.toString(attr.base));
 			if ((nm == "intel") && study != null) {
 				study.setattnlimit(attr.comp);
-			}
-			if (attr.comp < attr.base) {
-				lbl.setcolor(debuff);
-				lbl.tooltip = String.format("%d - %d", attr.base, attr.base
-						- attr.comp);
-			} else if (attr.comp > attr.base) {
-				lbl.setcolor(buff);
-				lbl.tooltip = String.format("%d + %d", attr.base, attr.comp
-						- attr.base);
-			} else {
-				lbl.setcolor(Color.WHITE);
-				lbl.tooltip = null;
 			}
 		}
 	}
